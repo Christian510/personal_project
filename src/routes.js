@@ -20,6 +20,7 @@ export default (
         <Route path='/Info' component={Info_Entry} />
         <Route path='/Video' component={Video} />
         <Route path='/Quotes' component={Quotes}/>
+        
     </Switch>
 
 );

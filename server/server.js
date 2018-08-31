@@ -91,8 +91,6 @@ app.get('/logout', (req, res) => {
 // lets make some data manipulating end points //
 
 
-
-
 app.listen(SERVER_PORT, () => {
   console.log(`Still alive on port: ${SERVER_PORT}`);
 })

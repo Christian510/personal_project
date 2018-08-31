@@ -6,7 +6,7 @@ class Quotes extends Component {
         super()
 
         this.state = {
-            chuckfact: ''
+           jokes: {}
 
         }
     }
@@ -14,19 +14,22 @@ class Quotes extends Component {
        this.getJoke()
     }
     getJoke(){
-        axios.get('https://api.chucknorris.io/jokes/random')
+        axios.get('https://icanhazdadjoke.com/', {headers: {'Accept':'application/json'}})
         .then(res => {
-            console.log(res.data)
-            this.setState({ chuckfact: res.data })
+             console.log(res.data)
+            this.setState({ jokes: res.data })
+             
         })
+       
     }
+   
     render() {
         console.log(this.state)
         return (
             <div>
                 <button onClick={()=> this.getJoke()}>Get A New Joke</button>
                 <p>
-                    {this.state.chuckfact.value}
+                    {this.state.jokes.joke}
                 </p>
             </div>
         )
