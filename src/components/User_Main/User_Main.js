@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { updateUser } from "./../../ducks/users";
 import { connect } from "react-redux";
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 class User_Main extends Component {
     constructor(props) {
@@ -21,20 +22,13 @@ class User_Main extends Component {
         console.log(this.props)
         return (
             <div>
-                <h1>You have landed</h1>
+                <h1>Hey You Have Made It Here! Welcome!</h1>
                 <hr /><hr /><hr />
-                {
-                    user.user_name ? (
-                        <div>
-                            
-                        </div>
-                    )
-                        : (<p>Please Log In</p>)
-                }
+                
                 <div>
-                    <button>Feeling Blue</button>
-                    <button>The Clouds Are Rolling In</button>
-                    <button>Crisis!</button>
+                  <Link to={'./Blue'}><button>Feeling Blue</button></Link>
+                    <Link to={'./Clouds'}><button>The Clouds Are Rolling In</button></Link>
+                    <Link to={'./Crisis'}><button>Crisis</button></Link>
                 </div>
                 <a href='http://localhost:3005/logout'>
                     <button>Logout</button>

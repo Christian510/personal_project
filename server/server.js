@@ -53,7 +53,7 @@ app.get('/auth/callback', async (req, res) => {
     sub
   } = resWithUserData.data;
   let db = req.app.get('db');
- let foundUser = await req.app.get('db').user.find_user([sub])
+  let foundUser = await req.app.get('db').user.find_user([sub])
   if (foundUser[0]) {
     req.session.user = foundUser[0];
     res.redirect('/#/User_Main')
@@ -64,18 +64,18 @@ app.get('/auth/callback', async (req, res) => {
   }
 })
 
-function envCheck(req, res, next) {
-  if (NODE_ENV === 'dev') {
-    req.app.get('db').user.get_user_by_id().then(userWithIdOne => {
-      req.session.user = userWithIdOne[0]
-      next();
-    })
-  } else {
-    nex()
-  }
-}
+// function envCheck(req, res, next) {
+//   if (NODE_ENV === 'dev') {
+//     req.app.get('db').user.get_user_by_id().then(userWithIdOne => {
+//       req.session.user = userWithIdOne[0]
+//       next();
+//     })
+//   } else {
+//     next()
+//   }
+// }
 
-app.get('/api/user-data', envCheck, (req, res) => {
+app.get('/api/user-data', (req, res) => {
   if (req.session.user) {
     res.status(200).send(req.session.user);
   } else {

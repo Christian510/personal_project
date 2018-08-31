@@ -2,14 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {unregister} from './registerServiceWorker';
-import {Provider} from 'react-redux';
+import { unregister } from './registerServiceWorker';
+import { Provider } from 'react-redux';
 import store from './store';
-
+import Center from 'react-center'
 ReactDOM.render(
-    <Provider store={store}>
-    <App />
-    </Provider>
+    <Center>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </Center>
     , document.getElementById('root'));
-    unregister();
-    
+unregister();
+
