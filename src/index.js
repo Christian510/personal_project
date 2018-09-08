@@ -8,7 +8,10 @@ import App from './App';
 import { unregister } from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import store from './store';
-import Center from 'react-center'
+import Center from 'react-center';
+
+
+
 
 ReactDOM.render(
     <Center>
@@ -18,4 +21,6 @@ ReactDOM.render(
     </Center>
     , document.getElementById('root'));
 unregister();
+
+
 

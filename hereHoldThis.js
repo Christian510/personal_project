@@ -6,3 +6,9 @@
 // <Blue />
 //     <Clouds />
 //     <Crisis />
+
+
+
+//<Route path='/Video' component={Render_Video}/>
+
+
