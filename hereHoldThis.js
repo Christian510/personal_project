@@ -9,6 +9,6 @@
 
 
 
-//<Route path='/Video' component={Render_Video}/>
+//
 
 
