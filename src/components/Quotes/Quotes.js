@@ -28,9 +28,9 @@ class Quotes extends Component {
         return (
             <div>
                 <button onClick={()=> this.getJoke()}>Get A New Joke</button>
-                <p>
+                <span className='quote'>
                     {this.state.jokes.joke}
-                </p>
+                </span>
             </div>
         )
     }

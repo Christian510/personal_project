@@ -1,4 +1,10 @@
-import {createStore} from 'redux';
+import {createStore, combineReducers} from 'redux';
 import reducer from './ducks/users';
 
-export default createStore(reducer);
+
+let reducers = combineReducers({
+    users: reducer
+   
+})
+
+export default createStore(reducers);

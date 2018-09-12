@@ -1,18 +1,20 @@
-require('dotenv').config();
+
 import _ from 'lodash';
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import YTSearch from ' youtube-api-search';
-import SearchBar from './components/Video/Search_Bar';
-import VideoList from './components/Video/Video_List';
-import VideoDetail from './components/Video/Video_Detail';
+import YTSearch from 'youtube-api-search';
+import SearchBar from './Search_Bar';
+import VideoList from './Video_List';
+import VideoDetail from './Video_Detail';
+import './Video.css';
+import Quotes from '../Quotes/Quotes';
+import { Link } from 'react-router-dom'
 
 
 const {
-    REACT_YOUTUBE_API_KEY
+    REACT_APP_YOUTUBE_API_KEY
 } = process.env
 
-class App extends Component {
+class RenderVideo extends Component {
     constructor(props) {
         super(props);
 
@@ -20,11 +22,11 @@ class App extends Component {
             videos: [],
             selectedVideo: null
         };
-        this.videoSearch('surfboards');
+        this.videoSearch('falling pandas');
     }
 
     videoSearch(term) {
-        YTSearch({ key: REACT_YOUTUBE_API_KEY, term: term }, (videos) => {
+        YTSearch({ key: REACT_APP_YOUTUBE_API_KEY, term: term }, (videos) => {
             this.setState({
                 videos: videos,
                 selectedVideo: videos[0]
@@ -37,11 +39,17 @@ class App extends Component {
 
         return (
             <div>
+
+                <h5> <span><Quotes /></span> </h5>
+
                 <SearchBar onSearchTermChange={videoSearch} />
                 <VideoDetail video={this.state.selectedVideo} />
                 <VideoList
                     onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
                     videos={this.state.videos} />
+                <div>
+                    <Link to={'./User_Main'}><button><h1>Home</h1></button></Link>
+                </div>
             </div>
         )
     }
@@ -49,5 +57,4 @@ class App extends Component {
 
 
 
-ReactDOM.render(<App />, document.querySelector('.container'))
-
+export default RenderVideo

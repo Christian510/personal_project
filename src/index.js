@@ -8,17 +8,15 @@ import App from './App';
 import { unregister } from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import store from './store';
-import Center from 'react-center';
+
 
 
 
 
 ReactDOM.render(
-    <Center>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </Center>
+    <Provider store={store}>
+        <App />
+    </Provider>
     , document.getElementById('root'));
 unregister();
 

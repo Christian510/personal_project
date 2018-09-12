@@ -3,6 +3,9 @@ const express = require('express')
   , session = require('express-session')
   , massive = require('massive')
   , axios = require('axios')
+  , controller = require('./controller')
+  
+ 
 
 const app = express();
 
@@ -60,7 +63,7 @@ app.get('/auth/callback', async (req, res) => {
   } else {
     let createdUser = await db.user.create_user([name, email, phone, sub])
     req.session.user = createdUser[0];
-    res.redirect('/#/User_Main');
+    res.redirect('/#/Info');
   }
 })
 
@@ -89,7 +92,8 @@ app.get('/logout', (req, res) => {
 })
 
 // lets make some data manipulating end points //
-
+app.post('/api/saveInfo')
+// app.get('/test', controller.sendEmail)
 
 app.listen(SERVER_PORT, () => {
   console.log(`Still alive on port: ${SERVER_PORT}`);

@@ -9,6 +9,7 @@ export default class Login extends Component {
   render() {
     return (
       <div className='App'>
+      <header><h1> A Break In The Silence</h1></header>
         <button onClick={this.login}>LOGIN</button>
       </div>
     )
