@@ -5,9 +5,10 @@ const express = require('express')
   , axios = require('axios')
   , controller = require('./controller')
   
- 
-
+  
 const app = express();
+
+app.use( express.static( `${__dirname}/../build` ) );
 
 const {
   SERVER_PORT,
@@ -88,12 +89,26 @@ app.get('/api/user-data', (req, res) => {
 
 app.get('/logout', (req, res) => {
   req.session.destroy();
-  res.redirect('http://localhost:3000/#/')
+  res.redirect=process.env.REACT_APP_LOGIN
 })
 
 // lets make some data manipulating end points //
-app.post('/api/saveInfo')
+
+app.post('/api/saveInfo', controller.create)
+
+app.get('/api/getContact', controller.getUserData )
+
+app.get('/api/userSession', (req, res)=>{
+  res.status(200).send(req.session.user)
+})
+
+app.delete('/api/delete/:contactId', controller.delete)
+
+app.delete('/api/deleteFriend/:contactId', controller.deleteFriend)
+
 // app.get('/test', controller.sendEmail)
+
+
 
 app.listen(SERVER_PORT, () => {
   console.log(`Still alive on port: ${SERVER_PORT}`);

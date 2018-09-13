@@ -6,29 +6,65 @@ class Info_Entry extends Component {
     constructor() {
         super();
         this.state = {
-            friend1: '',
-            email1: '',
-            phone1: '',
-            friend2: '',
-            email2: '',
-            phone2: '',
-            friend3: '',
-            email3: '',
-            phone3: '',
-            friend4: '',
-            email4: '',
-            phone4: '',
-            doctor: '',
-            doctor_email: '',
-            doctor_phone: '',
-            therapist: '',
-            therapist_email: '',
-            therapist_phone: ''
+            newData: {
+                friend1: '',
+                email1: '',
+                phone1: '',
+                friend2: '',
+                email2: '',
+                phone2: '',
+                friend3: '',
+                email3: '',
+                phone3: '',
+                friend4: '',
+                email4: '',
+                phone4: '',
+                doctor: '',
+                doctor_email: '',
+                doctor_phone: '',
+                therapist: '',
+                therapist_email: '',
+                therapist_phone: ''
+            },
+            contacts: {
+                userFriend: [],
+                userDoctor: [],
+            },
+            returned: false
         }
+
     }
 
-    saveInfo(){
-        axios.post('/api/saveInfo')
+    delete(id) {
+        axios.delete(`/api/delete/${id}`)
+    }
+
+    deleteFriend(id) {
+        axios.delete(`/api/deleteFriend/${id}`)
+    }
+
+    componentDidMount() {
+        axios.get('/api/userSession')
+            .then(res => {
+                console.log(res.data)
+            })
+        this.getContact()
+    }
+
+    saveInfo() {
+        axios.post('/api/saveInfo', this.state.newData)
+            .then(() => this.props.history.push('/User_Main'))
+    }
+
+    getContact() {
+        axios.get('/api/getContact')
+            .then(res => {
+                console.log(res.data)
+                this.setState({
+                    contacts: res.data,
+                    returned: true
+                })
+            })
     }
 
     //////////////// FRIEND1 STUFF
@@ -141,59 +177,125 @@ class Info_Entry extends Component {
     /////////////////
     render() {
         console.log(this.state)
+        const {
+            returned,
+            contacts
+        } = this.state
+
         return (
 
             <div>
                 <h1> Lets Set Up Your Support System</h1>
 
-                <h2>Your Friend</h2>
-                <input onChange={(event) => this.handleFriendName(event)} />
+                <h2>Your Friend</h2>   <button>Edit</button>
+                <button onClick={() => this.deleteFriend(contacts.userFriend[0].friend_id)}>Delete</button>
+                <input
+                    placeholder={contacts.userFriend[0] ? contacts.userFriend[0].friend_name : ''}
+                    onChange={(event) => this.handleFriendName(event)}
+                />
                 <h4>Their Email</h4>
-                <input onChange={(event) => this.handleFriendEmail(event)} />
+                <input
+                    placeholder={contacts.userFriend[0] ? contacts.userFriend[0].email : ''}
+                    onChange={(event) => this.handleFriendEmail(event)}
+                />
                 <h4>Their Phone Number</h4>
-                <input onChange={(event) => this.handleFriendPhone(event)} />
+                <input
+                    placeholder={contacts.userFriend[0] ? contacts.userFriend[0].phone : ''}
+                    onChange={(event) => this.handleFriendPhone(event)}
+                />
 
 
-                <h2>Another Friend</h2>
-                <input onChange={(event) => this.handleFriendName2(event)} />
+                <h2>Another Friend</h2> <button>Edit</button>
+                <button onClick={() => this.deleteFriend(contacts.userFriend[1].friend_id)}>Delete</button>
+                <input
+                    placeholder={contacts.userFriend[1] ? contacts.userFriend[1].friend_name : ''}
+                    onChange={(event) => this.handleFriendName2(event)}
+                />
                 <h4>Their Email</h4>
-                <input onChange={(event) => this.handleFriendEmail2(event)} />
+                <input
+                    placeholder={contacts.userFriend[1] ? contacts.userFriend[1].email : ''}
+                    onChange={(event) => this.handleFriendEmail2(event)}
+                />
                 <h4>Their Phone Number</h4>
-                <input onChange={(event) => this.handleFriendPhone2(event)} />
+                <input
+                    placeholder={contacts.userFriend[1] ? contacts.userFriend[1].phone : ''}
+                    onChange={(event) => this.handleFriendPhone2(event)}
+                />
 
 
-                <h2>Another Friend</h2>
-                <input onChange={(event) => this.handleFriendName3(event)} />
+                <h2>Another Friend</h2> <button>Edit</button>
+                <button onClick={() => this.deleteFriend(contacts.userFriend[2].friend_id)}>Delete</button>
+                <input
+                    placeholder={contacts.userFriend[2] ? contacts.userFriend[2].friend_name : ''}
+                    onChange={(event) => this.handleFriendName3(event)}
+                />
                 <h4>Their Email</h4>
-                <input onChange={(event) => this.handleFriendEmail3(event)} />
+                <input
+                    placeholder={contacts.userFriend[2] ? contacts.userFriend[2].email : ''}
+                    onChange={(event) => this.handleFriendEmail3(event)}
+                />
                 <h4>Their Phone Number</h4>
-                <input onChange={(event) => this.handleFriendPhone3(event)} />
+                <input
+                    placeholder={contacts.userFriend[2] ? contacts.userFriend[2].phone : ''}
+                    onChange={(event) => this.handleFriendPhone3(event)}
+                />
 
 
-                <h2>Another Friend</h2>
-                <input onChange={(event) => this.handleFriendName4(event)} />
+                <h2>Another Friend</h2> <button>Edit</button>
+                <button onClick={() => this.deleteFriend(contacts.userFriend[3].friend_id)}>Delete</button>
+                <input
+                    placeholder={contacts.userFriend[3] ? contacts.userFriend[3].friend_name : ''}
+                    onChange={(event) => this.handleFriendName4(event)}
+                />
                 <h4>Their Email</h4>
-                <input onChange={(event) => this.handleFriendEmail4(event)} />
+                <input
+                    placeholder={contacts.userFriend[3] ? contacts.userFriend[3].email : ''}
+                    onChange={(event) => this.handleFriendEmail4(event)}
+                />
                 <h4>Their Phone Number</h4>
-                <input onChange={(event) => this.handleFriendPhone4(event)} />
+                <input
+                    placeholder={contacts.userFriend[3] ? contacts.userFriend[3].phone : ''}
+                    onChange={(event) => this.handleFriendPhone4(event)}
+                />
 
 
-                <h2>Your Doctor</h2>
-                <input onChange={(event) => this.handleDoctorName(event)} />
+                <h2>Your Doctor</h2> <button>Edit</button>
+                <button onClick={() => this.delete(contacts.userDoctor[0].doctor_id)} >Delete</button>
+                <input
+                    placeholder={contacts.userDoctor[0] ? contacts.userDoctor[0].doctor_name : ''}
+                    onChange={(event) => this.handleDoctorName(event)}
+                />
                 <h4>Their Email</h4>
-                <input onChange={(event) => this.handleDoctorEmail(event)} />
+                <input
+                    placeholder={contacts.userDoctor[0] ? contacts.userDoctor[0].email : ''}
+                    onChange={(event) => this.handleDoctorEmail(event)}
+                />
                 <h4>Their Phone Number</h4>
-                <input onChange={(event) => this.handleDoctorPhone(event)} />
+                <input
+                    placeholder={contacts.userDoctor[0] ? contacts.userDoctor[0].phone : ''}
+                    onChange={(event) => this.handleDoctorPhone(event)}
+                />
 
 
-                <h2>Your Therapist</h2>
-                <input onChange={(event) => this.handleTherapistName(event)} />
+                <h2>Your Therapist</h2> <button>Edit</button>
+                <button onClick={() => this.delete(contacts.userDoctor[1].doctor_id)}>Delete</button>
+                <input
+                    placeholder={contacts.userDoctor[1] ? contacts.userDoctor[1].doctor_name : ''}
+                    onChange={(event) => this.handleTherapistName(event)}
+                />
                 <h4>Their Email</h4>
-                <input onChange={(event) => this.handleTherapistEmail(event)} />
+                <input
+                    placeholder={contacts.userDoctor[1] ? contacts.userDoctor[1].email : ''}
+                    onChange={(event) => this.handleTherapistEmail(event)}
+                />
                 <h4>Their Phone Number</h4>
-                <input onChange={(event) => this.handleTherapistPhone(event)} />
-                
-                <button onClick={()=> this.saveInfo()}>Save</button>
+                <input
+                    placeholder={contacts.userDoctor[1] ? contacts.userDoctor[1].phone : ''}
+                    onChange={(event) => this.handleTherapistPhone(event)}
+                />
+
+                <button onClick={() => this.saveInfo()}>Save</button>
+
             </div>
 
         )

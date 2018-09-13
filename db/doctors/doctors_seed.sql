@@ -4,5 +4,5 @@ create table doctors (
     doctor_name varchar (180),
     email varchar (180),
     phone text,
-    user_id text
+    user_id integer references users(user_id)
 )

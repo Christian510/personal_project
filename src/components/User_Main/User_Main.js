@@ -35,7 +35,8 @@ sendMail(){
                     <Link to={'./Video'}><button className="grey" onClick={this.sendMail}><h4>The Clouds Are Rolling In</h4></button></Link>
                     <Link to={'./Video'}><button className="red"><h4>I'm In Crisis</h4></button></Link>
                 </div>
-                <a href='http://localhost:3005/logout'>
+                <a href={process.env.REACT_APP_INFO}><button><h3>Your Information Page</h3></button></a>
+                <a href={process.env.REACT_APP_LOGOUT}>
                     <button><h3>Logout</h3></button>
                 </a>
 
